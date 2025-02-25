@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        function toggleResumo() {
+            document.getElementById('resumoPedido').classList.toggle('hidden');
+        }
+        
+        function togglePagamentoFields() {
+            const boletoFields = document.getElementById('boletoFields');
+            const metodoPagamento = document.getElementById('metodoPagamento').value;
+            const cartaoFields = document.getElementById('cartaoFields');
+            const pixFields = document.getElementById('pixFields');
+            
+            cartaoFields.classList.add('hidden');
+            pixFields.classList.add('hidden');
+            boletoFields.classList.add('hidden');
+            
+            if (metodoPagamento === 'cartao') {
+                cartaoFields.classList.remove('hidden');
+            } else if (metodoPagamento === 'boleto') {
+                boletoFields.classList.remove('hidden');
+            } else if (metodoPagamento === 'pix') {
+                pixFields.classList.remove('hidden');
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100 p-6">
+    <div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+        <div class="flex justify-center mb-4">
+            <img src="img/image-placeholder.png" alt="Logotipo da Empresa" class="h-16">
+        </div>
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">Finalizar Compra</h2>
+        
+        <!-- Resumo do Pedido -->
+        <button onclick="toggleResumo()" class="w-full text-left font-semibold text-gray-700 p-2 border rounded-md mb-4 bg-gray-200">Resumo do Pedido ▼</button>
+        <div id="resumoPedido" class="hidden bg-gray-100 p-4 rounded-md shadow-inner mb-4">
+            <ul class="text-gray-700">
+                <li> Plano Anual - R$ 59,00</li>
+                
+            </ul>
+            <p class="font-bold mt-2">Total: R$ 59,90</p>
+        </div>
+        
+        <!-- Formulário de Pagamento -->
+        <form>
+            <label class="block text-gray-700 font-semibold">Nome Completo</label>
+            <input type="text" class="w-full p-2 border rounded-md mb-4" required>
+            
+            <label class="block text-gray-700 font-semibold">Telefone</label>
+            <input type="tel" class="w-full p-2 border rounded-md mb-4" placeholder="(XX) XXXXX-XXXX" required>
+            
+            <label class="block text-gray-700 font-semibold">Email</label>
+            <input type="email" class="w-full p-2 border rounded-md mb-4" required>
+            
+            <label class="block text-gray-700 font-semibold">Escolha a forma de pagamento</label>
+            <select id="metodoPagamento" class="w-full p-2 border rounded-md mb-4" onchange="togglePagamentoFields()">
+                <option value="" selected disabled>Selecione uma opção</option>
+                <option value="cartao">Cartão de Crédito</option>
+                <option value="boleto">Boleto</option>
+                <option value="pix">Pix</option>
+            </select>
+            
+            <!-- Código de Barras do Boleto -->
+            <div id="boletoFields" class="hidden">
+                <label class="block text-gray-700 font-semibold">Código de Barras</label>
+                <input type="text" class="w-full p-2 border rounded-md mb-4" value="34191.79001 01043.510047 91020.150008 7 89990000005000" readonly>
+                <p class="text-gray-600 text-sm">Copie o código acima e pague no seu banco ou lotérica.</p>
+            </div>
+            
+            <!-- Campos do Cartão de Crédito -->
+            <div id="cartaoFields" class="hidden">
+                <label class="block text-gray-700 font-semibold">Número do Cartão</label>
+                <input type="text" class="w-full p-2 border rounded-md mb-4" placeholder="0000 0000 0000 0000" required>
+                
+                <label class="block text-gray-700 font-semibold">Data de Expiração</label>
+                <input type="text" class="w-full p-2 border rounded-md mb-4" placeholder="MM/AA" required>
+                
+                <label class="block text-gray-700 font-semibold">Código de Segurança (CVC)</label>
+                <input type="text" class="w-full p-2 border rounded-md mb-4" placeholder="000" required>
+            </div>
+            
+            <!-- Chave PIX -->
+            <div id="pixFields" class="hidden">
+                <label class="block text-gray-700 font-semibold">Chave PIX</label>
+                <input type="text" class="w-full p-2 border rounded-md mb-4" value="pix@empresa.com" readonly>
+                <p class="text-gray-600 text-sm">Copie e cole essa chave no seu aplicativo bancário para realizar o pagamento.</p>
+            </div>
+            
+            <button class="w-full bg-green-500 text-white p-3 rounded-md font-bold hover:bg-green-600">Finalizar Compra</button>
+        </form>
+    </div>
+    
+    <!-- Provas Sociais -->
+    <div class="max-w-2xl mx-auto mt-6">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">O que nossos clientes dizem do TM3D</h3>
+        <div class="bg-white p-4 rounded-lg shadow-lg">
+            <p class="text-gray-700 italic">"Produto incrível! Recomendo a todos."</p>
+            <div class="flex mt-2">
+                <span class="text-yellow-500">★★★★★</span>
+                <span class="ml-2 text-gray-700">- João Silva</span>
+            </div>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow-lg mt-4">
+            <p class="text-gray-700 italic">"Ajudou muito na minha loja. As vendas aumentaram!"</p>
+            <div class="flex mt-2">
+                <span class="text-yellow-500">★★★★★</span>
+                <span class="ml-2 text-gray-700">- Maria Souza</span>
+            </div>
+        </div>
+    </div>
+    <!-- Banner ao final dos depoimentos -->
+    <div class="max-w-2xl mx-auto mt-6">
+        <img src="img/mercadopago-garantida.webp" alt="Banner Promocional" class="w-full rounded-lg shadow-lg">
+    </div>
+</body>
+</html>
